@@ -1,0 +1,11 @@
+#header {
+    background-color: black;
+    color: white;
+}
+#searchArea {
+    background-color: lightgray;
+}
+#btnSearch, .fiveDay {
+    background-color: blue;
+    color: white;
+}

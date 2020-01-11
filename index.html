@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" 
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+          integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+          crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
+          crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div id='header' class="w-100 text-center">
+          <h1>Weather Dashboard</h1>
+        </div>
+      </div>
+      <div id='main' class="row">
+        <div id='searchArea' class="col-3">
+          <label>Search for a City:</label> <br/>
+          <input id='txtCity'/><button id='btnSearch'><i class="fa fa-search"></i></button><br/>
+          <br/>
+          <div id='searchList'></div>
+        </div>
+        <div class="col-9">
+          <div class="row">
+            <div class="col-12 mt-2">
+              <h4><label id='lblCity'></label><img id='imgIcon'></h4>
+              Temperature: <label id='lblTemp'> </label>&deg;F<br>
+              Humidity: <label id='lblHumidity'> </label>%<br>
+              Wind Speedy: <label id='lblWind'> </label> MPH<br>
+              UV Index: <label id='lblUV' class="p-1 "> </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 mt-2">
+              <h4><label id='lblCity'>5-Day Forcast</label></h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class='col col-2 fiveDay m-2'>
+              <label id='lblDateDay1'>8/16/2019</label><br><br>
+              <img id='imgDay1'><br><br>
+              Temp: <label  id='lblTempDay1'> 86.84</label>&deg;F<br><br>
+              Humidity: <label id='lblHumidityDay1'> 43%</label>
+            </div>
+            <div class='col col-2 fiveDay m-2'>
+              <label id='lblDateDay2'>8/16/2019</label><br><br>
+              <img id='imgDay2'><br><br>
+              Temp: <label  id='lblTempDay2'> 86.84</label>&deg;F<br><br>
+              Humidity: <label id='lblHumidityDay2'> 43%</label>
+            </div>
+            <div class='col col-2 fiveDay m-2'>
+              <label id='lblDateDay3'>8/16/2019</label><br><br>
+              <img id='imgDay3'><br><br>
+              Temp: <label  id='lblTempDay3'> 86.84</label>&deg;F<br><br>
+              Humidity: <label id='lblHumidityDay3'> 43</label>
+            </div>
+            <div class='col col-2 fiveDay m-2'>
+              <label id='lblDateDay4'>8/16/2019</label><br><br>
+              <img id='imgDay4'><br><br>
+              Temp: <label  id='lblTempDay4'> 86.84</label>&deg;F<br><br>
+              Humidity: <label id='lblHumidityDay4'> 43%</label>
+            </div>
+            <div class='col col-2 fiveDay m-2'>
+              <label id='lblDateDay5'>8/16/2019</label><br><br>
+              <img id='imgDay5'><br><br>
+              Temp: <label  id='lblTempDay5'> 86.84</label>&deg;F<br><br>
+              Humidity: <label id='lblHumidityDay5'> 43%</label>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
