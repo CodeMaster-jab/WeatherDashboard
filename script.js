@@ -32,6 +32,7 @@ function getUV(lat, lon) {
   });
 }
 function get5Day(city) {
+  const dow = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const APIKey = 'f905a700c670b74f604221d5fafaf985';
   // Here we are building the URL we need to query the database
   const queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${APIKey}`;
@@ -55,6 +56,7 @@ function get5Day(city) {
     // Loop through the results looking for matching dates
     for (let i = 0; i < response.list.length; i++) {
       if (response.list[i].dt_txt === dt1) {
+        $('#lblDOW1').text(dow[day1.getDay()]);
         $('#lblDateDay1').text(day1.getMonth() +1 + "/" + day1.getDate() + "/" + day1.getFullYear());
         $('#imgDay1').attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
         $('#imgDay1').attr('title', response.list[i].weather[0].description);
@@ -62,6 +64,7 @@ function get5Day(city) {
         $('#lblHumidityDay1').text(response.list[i].main.humidity + "%");
       }
       if (response.list[i].dt_txt === dt2) {
+        $('#lblDOW2').text(dow[day2.getDay()]);
         $('#lblDateDay2').text(day2.getMonth() +1 + "/" + day2.getDate() + "/" + day2.getFullYear());
         $('#imgDay2').attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
         $('#imgDay2').attr('title', response.list[i].weather[0].description);
@@ -69,6 +72,7 @@ function get5Day(city) {
         $('#lblHumidityDay2').text(response.list[i].main.humidity + "%");
       }
       if (response.list[i].dt_txt === dt3) {
+        $('#lblDOW3').text(dow[day3.getDay()]);
         $('#lblDateDay3').text(day3.getMonth() +1 + "/" + day3.getDate() + "/" + day3.getFullYear());
         $('#imgDay3').attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
         $('#imgDay3').attr('title', response.list[i].weather[0].description);
@@ -76,6 +80,7 @@ function get5Day(city) {
         $('#lblHumidityDay3').text(response.list[i].main.humidity + "%");
       }
       if (response.list[i].dt_txt === dt4) {
+        $('#lblDOW4').text(dow[day4.getDay()]);
         $('#lblDateDay4').text(day4.getMonth() +1 + "/" + day4.getDate() + "/" + day4.getFullYear());
         $('#imgDay4').attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
         $('#imgDay4').attr('title', response.list[i].weather[0].description);
@@ -83,6 +88,7 @@ function get5Day(city) {
         $('#lblHumidityDay4').text(response.list[i].main.humidity + "%");
       }
       if (response.list[i].dt_txt === dt5) {
+        $('#lblDOW5').text(dow[day5.getDay()]);
         $('#lblDateDay5').text(day5.getMonth() +1 + "/" + day5.getDate() + "/" + day5.getFullYear());
         $('#imgDay5').attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
         $('#imgDay5').attr('title', response.list[i].weather[0].description);
