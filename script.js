@@ -1,10 +1,11 @@
+/* eslint-disable no-extend-native */
 /* eslint-disable func-names */
 /* eslint-disable prefer-arrow-callback */
-Date.prototype.addDays = function(days) {
-  var date = new Date(this.valueOf());
+Date.prototype.addDays = function (days) {
+  const date = new Date(this.valueOf());
   date.setDate(date.getDate() + days);
   return date;
-}
+};
 function getUV(lat, lon) {
   // This is our API key. Add your own API key between the ""
   const APIKey = 'f905a700c670b74f604221d5fafaf985';
@@ -31,8 +32,8 @@ function getUV(lat, lon) {
     }
   });
 }
-function get5Day(city) {
-  const dow = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+function getFiveDay(city) {
+  const dow = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const APIKey = 'f905a700c670b74f604221d5fafaf985';
   // Here we are building the URL we need to query the database
   const queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${APIKey}`;
@@ -43,61 +44,22 @@ function get5Day(city) {
     method: 'GET',
   }).then(function (response) {
     console.log(response);
-    const day1 = new Date().addDays(1);
-    const day2 = new Date().addDays(2);
-    const day3 = new Date().addDays(3);
-    const day4 = new Date().addDays(4);
-    const day5 = new Date().addDays(5);
-    const dt1 = day1.getFullYear() + "-" + day1.getMonth() +1 + "-" + day1.getDate() + " 15:00:00";
-    const dt2 = day2.getFullYear() + "-" + day2.getMonth() +1 + "-" + day2.getDate() + " 15:00:00";
-    const dt3 = day3.getFullYear() + "-" + day3.getMonth() +1 + "-" + day3.getDate() + " 15:00:00";
-    const dt4 = day4.getFullYear() + "-" + day4.getMonth() +1 + "-" + day4.getDate() + " 15:00:00";
-    const dt5 = day5.getFullYear() + "-" + day5.getMonth() +1 + "-" + day5.getDate() + " 15:00:00";
-    // Loop through the results looking for matching dates
-    for (let i = 0; i < response.list.length; i++) {
-      if (response.list[i].dt_txt === dt1) {
-        $('#lblDOW1').text(dow[day1.getDay()]);
-        $('#lblDateDay1').text(day1.getMonth() +1 + "/" + day1.getDate() + "/" + day1.getFullYear());
-        $('#imgDay1').attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
-        $('#imgDay1').attr('title', response.list[i].weather[0].description);
-        $('#lblTempDay1').text(response.list[i].main.temp);
-        $('#lblHumidityDay1').text(response.list[i].main.humidity + "%");
-      }
-      if (response.list[i].dt_txt === dt2) {
-        $('#lblDOW2').text(dow[day2.getDay()]);
-        $('#lblDateDay2').text(day2.getMonth() +1 + "/" + day2.getDate() + "/" + day2.getFullYear());
-        $('#imgDay2').attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
-        $('#imgDay2').attr('title', response.list[i].weather[0].description);
-        $('#lblTempDay2').text(response.list[i].main.temp);
-        $('#lblHumidityDay2').text(response.list[i].main.humidity + "%");
-      }
-      if (response.list[i].dt_txt === dt3) {
-        $('#lblDOW3').text(dow[day3.getDay()]);
-        $('#lblDateDay3').text(day3.getMonth() +1 + "/" + day3.getDate() + "/" + day3.getFullYear());
-        $('#imgDay3').attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
-        $('#imgDay3').attr('title', response.list[i].weather[0].description);
-        $('#lblTempDay3').text(response.list[i].main.temp);
-        $('#lblHumidityDay3').text(response.list[i].main.humidity + "%");
-      }
-      if (response.list[i].dt_txt === dt4) {
-        $('#lblDOW4').text(dow[day4.getDay()]);
-        $('#lblDateDay4').text(day4.getMonth() +1 + "/" + day4.getDate() + "/" + day4.getFullYear());
-        $('#imgDay4').attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
-        $('#imgDay4').attr('title', response.list[i].weather[0].description);
-        $('#lblTempDay4').text(response.list[i].main.temp);
-        $('#lblHumidityDay4').text(response.list[i].main.humidity + "%");
-      }
-      if (response.list[i].dt_txt === dt5) {
-        $('#lblDOW5').text(dow[day5.getDay()]);
-        $('#lblDateDay5').text(day5.getMonth() +1 + "/" + day5.getDate() + "/" + day5.getFullYear());
-        $('#imgDay5').attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
-        $('#imgDay5').attr('title', response.list[i].weather[0].description);
-        $('#lblTempDay5').text(response.list[i].main.temp);
-        $('#lblHumidityDay5').text(response.list[i].main.humidity + "%");
+    for (let x = 1; x <= 5; x++) {
+      const day = new Date().addDays(x);
+      const dt = day.getFullYear() + "-" + day.getMonth() +1 + "-" + day.getDate() + " 15:00:00";
+      // Loop through the results looking for matching dates
+      for (let i = 0; i < response.list.length; i++) {
+        if (response.list[i].dt_txt === dt) {
+          $(`#lblDOW${x}`).text(dow[day.getDay()]);
+          $(`#lblDateDay${x}`).text(day.getMonth() +1 + "/" + day.getDate() + "/" + day.getFullYear());
+          $(`#imgDay${x}`).attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
+          $(`#imgDay${x}`).attr('title', response.list[i].weather[0].description);
+          $(`#lblTempDay${x}`).text(response.list[i].main.temp);
+          $(`#lblHumidityDay${x}`).text(`${response.list[i].main.humidity}%`);
+          break;
+        }
       }
     }
-    console.log(day1);
-
   });
 }
 function lkupCityWeather(city) {
@@ -124,12 +86,11 @@ function lkupCityWeather(city) {
     $('#lblHumidity').text(response.main.humidity);
     $('#lblWind').text(response.wind.speed);
     getUV(lat, lon);
-    get5Day(city);
+    getFiveDay(city);
   });
 }
 function cityButtonClicked(btn) {
   const city = $(btn).text();
-  console.log($(btn));
   lkupCityWeather(city);
 }
 function saveSearchHistory(city) {
@@ -157,7 +118,6 @@ $(function () {
   }
   $('#btnSearch').click(function () {
     const city = $('#txtCity').val();
-    console.log(city);
     const btn = $('<button>');
     btn.addClass('w-100 text-left btnCity');
     btn.text(city);
