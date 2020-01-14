@@ -73,7 +73,7 @@ function lkupCityWeather(city) {
   $.ajax({
     url: queryURL,
     method: 'GET',
-  }).then(function (response) {
+  }).done(function (response) {
     console.log(response);
     const lat = response.coord.lat;
     const lon = response.coord.lon;
