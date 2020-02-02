@@ -6,6 +6,19 @@ Date.prototype.addDays = function (days) {
   date.setDate(date.getDate() + days);
   return date;
 };
+function getDate(day) {
+  let year = day.getFullYear();
+  var month = parseInt(day.getMonth()) + 1;
+  if (month < 10) {
+    month = "0" + month.toString();
+  }
+  var dayn = day.getDate();
+  if (dayn < 10) {
+    dayn = "0" + dayn.toString();
+  }
+  const dt =  year + "-" + month + "-" + dayn;
+  return dt;
+}
 function getUV(lat, lon) {
   // This is our API key. Add your own API key between the ""
   const APIKey = 'f905a700c670b74f604221d5fafaf985';
@@ -16,6 +29,8 @@ function getUV(lat, lon) {
     url: queryURL,
     method: 'GET',
   }).then(function (response) {
+    console.log('getUV');
+    console.log(response);
     const uvi = response.value;
     $('#lblUV').text(uvi);
     if (uvi > 0 && uvi < 4) {
@@ -43,13 +58,16 @@ function getFiveDay(city) {
     url: queryURL,
     method: 'GET',
   }).then(function (response) {
+    console.log('getFiveDay');
     console.log(response);
     for (let x = 1; x <= 5; x++) {
       const day = new Date().addDays(x);
-      const dt = day.getFullYear() + "-" + day.getMonth() +1 + "-" + day.getDate() + " 15:00:00";
+      const dt = `${getDate(day)} 15:00:00`;
+      console.log(dt);
       // Loop through the results looking for matching dates
       for (let i = 0; i < response.list.length; i++) {
         if (response.list[i].dt_txt === dt) {
+          console.log('Match found');
           $(`#lblDOW${x}`).text(dow[day.getDay()]);
           $(`#lblDateDay${x}`).text(day.getMonth() +1 + "/" + day.getDate() + "/" + day.getFullYear());
           $(`#imgDay${x}`).attr('src', `http://openweathermap.org/img/w/${response.list[i].weather[0].icon}.png`);
@@ -73,7 +91,8 @@ function lkupCityWeather(city) {
   $.ajax({
     url: queryURL,
     method: 'GET',
-  }).done(function (response) {
+  }).then(function (response) {
+    console.log('lkupCityWeather');
     console.log(response);
     const lat = response.coord.lat;
     const lon = response.coord.lon;
@@ -118,6 +137,7 @@ $(function () {
   }
   $('#btnSearch').click(function () {
     const city = $('#txtCity').val();
+    $('#txtCity').val('');
     const btn = $('<button>');
     btn.addClass('w-100 text-left btnCity');
     btn.text(city);
